@@ -21,7 +21,6 @@
 
 enum EngineId {
     Alsa,
-    Oss,
     PulseAudio,
     EngineMax
 };
