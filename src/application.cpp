@@ -60,7 +60,7 @@ Qtilities::Application::Application(int argc, char* argv[])
 
     trayIcon_ = new StatusNotifierItem(qApp->applicationName(), this);
     trayIcon_->setCategory(StatusNotifierItem::SNICategory::ApplicationStatus);
-    trayIcon_->setStatus(StatusNotifierItem::SNIStatus::Active);
+    trayIcon_->setStatus(StatusNotifierItem::SNIStatus::Passive);
     trayIcon_->setToolTipTitle(qApp->applicationDisplayName());
 
     setQuitOnLastWindowClosed(false);
@@ -159,6 +159,9 @@ void Qtilities::Application::initUi()
         updateTrayIcon();
     });
     connect(mnuVolume_, &MenuVolume::sigVolumeChanged, this, &Application::onVolumeChanged);
+    connect(mnuVolume_, &QMenu::aboutToHide, this, [this]() {
+        trayIcon_->setStatus(StatusNotifierItem::SNIStatus::Passive);
+    });
     connect(trayIcon_, &StatusNotifierItem::activateRequested, this, &Application::onActivateRequested);
     connect(trayIcon_, &StatusNotifierItem::secondaryActivateRequested, this, &Application::onSecondaryActivateRequested);
     connect(trayIcon_, &StatusNotifierItem::scrollRequested, this, &Application::onScrollRequested);
