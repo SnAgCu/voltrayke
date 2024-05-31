@@ -290,6 +290,8 @@ void Qtilities::Application::onSecondaryActivateRequested(const QPoint&)
 
 void Qtilities::Application::onScrollRequested(int delta, Qt::Orientation)
 {
+    if (!channel_)
+        return;
     int v = std::clamp(channel_->volume() + delta / 120, 0, 100);
     channel_->setVolume(v);
     mnuVolume_->setVolume(v);
@@ -324,6 +326,8 @@ void Qtilities::Application::updateDeviceList()
 
 void Qtilities::Application::updateTrayIcon()
 {
+    if (!channel_)
+        return;
     QString iconName;
     int volume = channel_->volume();
     if (volume <= 0 || channel_->mute())
