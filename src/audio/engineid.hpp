@@ -20,7 +20,11 @@
 #pragma once
 
 enum EngineId {
+#if USE_ALSA
     Alsa,
+#endif
+#if USE_PULSEAUDIO
     PulseAudio,
+#endif
     EngineMax
 };

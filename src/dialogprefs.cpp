@@ -96,7 +96,11 @@ void Qtilities::DialogPrefs::setupUi()
 #endif
     connect(ui->cbxEngine, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, [this](int id) {
+#if USE_PULSEAUDIO
                 ui->chkIgnoreMax->setEnabled(id == EngineId::PulseAudio);
+#endif
+#if USE_ALSA
                 ui->chkNormalize->setEnabled(id == EngineId::Alsa);
+#endif
             });
 }
