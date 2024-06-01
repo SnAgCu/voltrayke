@@ -177,8 +177,8 @@ void Qtilities::Application::about()
 void Qtilities::Application::preferences()
 {
     DialogPrefs prefs(mnuVolume_);
-    prefs.loadSettings();
     prefs.setDeviceList(deviceList_);
+    prefs.loadSettings();
 
     centerOnScreen(&prefs);
 
